@@ -21,8 +21,11 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test && apt-get update
 RUN add-apt-repository ppa:apt-fast/stable && apt-get update && apt-get -y install apt-fast
 RUN apt-fast install -y git bzip2 clang cmake curl unzip wget python3-pip python-opengl zlib1g-dev \
     xvfb libxrender1 libxtst6 libxi6 libglib2.0-dev libopenmpi-dev libstdc++6 openmpi-bin \
-    r-base pandoc libcurl4-openssl-dev \
+    pandoc libcurl4-openssl-dev \
     openjdk-8-jdk openjdk-8-jre
+
+RUN echo deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran40/ >> /etc/apt/sources.list \
+    && apt-get update apt-get -y install r-base
 
 # Install IB Gateway: Installs to ~/Jts
 RUN wget https://cdn.quantconnect.com/interactive/ibgateway-stable-standalone-linux-x64-v978.2c.sh && \
